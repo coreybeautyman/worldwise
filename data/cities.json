@@ -1,0 +1,52 @@
+{
+  "cities": [
+    {
+      "cityName": "Madrid",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2027-07-15T08:22:53.976Z",
+      "notes": "",
+      "position": {
+        "lat": 40.46635901755316,
+        "lng": -3.7133789062500004
+      },
+      "id": "17806751"
+    },
+    {
+      "id": "a153",
+      "cityName": "Ujue",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2024-06-11T18:56:33.015Z",
+      "notes": "",
+      "position": {
+        "lat": "42.486217613747954",
+        "lng": "-1.4701421836677178"
+      }
+    },
+    {
+      "id": "2df0",
+      "cityName": "Muniesa",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2024-06-19T19:02:29.689Z",
+      "notes": "",
+      "position": {
+        "lat": "41.092644990767575",
+        "lng": "-0.7863571641093215"
+      }
+    },
+    {
+      "id": "3ed3",
+      "cityName": "Alhambra",
+      "country": "Spain",
+      "emoji": "🇪🇸",
+      "date": "2024-07-03T11:53:52.563Z",
+      "notes": "",
+      "position": {
+        "lat": "38.8397302464838",
+        "lng": "-3.140713908671227"
+      }
+    }
+  ]
+}
