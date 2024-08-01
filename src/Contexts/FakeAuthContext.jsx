@@ -4,7 +4,8 @@ const FAKE_USER = {
   name: 'Jack',
   email: 'jack@example.com',
   password: 'qwerty',
-  avatar: 'https://i.pravatar.cc/100?u=zz'
+  avatar:
+    'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
 };
 
 const AuthContext = createContext();

@@ -8,7 +8,7 @@ import {
 
 const CitiesContext = createContext();
 
-const BASE_URL = 'http://localhost:9000';
+// const BASE_URL = 'http://localhost:9000';
 
 const initialState = {
   cities: [],
@@ -57,8 +57,7 @@ function CitiesProvider({ children }) {
     async function fetchCities() {
       try {
         dispatch({ type: 'loading' });
-        const res = await fetch(`${BASE_URL}/cities`);
-        const data = await res.json();
+        const data = JSON.parse(localStorage.getItem('cities') || []);
         dispatch({ type: 'cities/loaded', payload: data });
       } catch (error) {
         dispatch({
@@ -75,9 +74,13 @@ function CitiesProvider({ children }) {
       if (+id === +currentCity.id) return;
       try {
         dispatch({ type: 'loading' });
-        const res = await fetch(`${BASE_URL}/cities/${id}`);
-        const data = await res.json();
-        dispatch({ type: 'city/loaded', payload: data });
+        const data = JSON.parse(localStorage.getItem('cities') || []);
+        const city = data.find((city) => city.id === id);
+        if (city) {
+          dispatch({ type: 'city/loaded', payload: city });
+        } else {
+          throw new Error('City not found');
+        }
       } catch (error) {
         dispatch({
           type: 'rejected',
@@ -91,16 +94,12 @@ function CitiesProvider({ children }) {
   async function createCity(newCity) {
     try {
       dispatch({ type: 'loading' });
-      const res = await fetch(`${BASE_URL}/cities`, {
-        method: 'POST',
-        body: JSON.stringify(newCity),
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      const data = await res.json();
+      const data = JSON.parse(localStorage.getItem('cities') || '[]');
+      newCity.id = Date.now();
+      data.push(newCity);
+      localStorage.setItem('cities', JSON.stringify(data));
 
-      dispatch({ type: 'city/created', payload: data });
+      dispatch({ type: 'city/created', payload: newCity });
     } catch (error) {
       dispatch({
         type: 'rejected',
@@ -113,9 +112,9 @@ function CitiesProvider({ children }) {
     try {
       dispatch({ type: 'loading' });
 
-      await fetch(`${BASE_URL}/cities/${id}`, {
-        method: 'DELETE'
-      });
+      const data = JSON.parse(localStorage.getItem('cities') || []);
+      const newData = data.filter((city) => city.id !== id);
+      localStorage.setItem('cities', JSON.stringify(newData));
 
       dispatch({
         type: 'city/deleted',

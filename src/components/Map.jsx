@@ -1,4 +1,4 @@
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styles from './Map.module.css';
 import {
   MapContainer,
@@ -10,14 +10,14 @@ import {
 } from 'react-leaflet';
 import { useEffect, useState } from 'react';
 import { useCities } from '../Contexts/citiesContext';
-import { map } from 'leaflet';
+// import { map } from 'leaflet';
 import { useGeolocation } from '../../hooks/useGeolocation';
 import Button from './Button';
 import { useUrlPosition } from '../../hooks/useUrlPosition';
 
 function Map() {
   const { cities } = useCities();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [mapPosition, setMapPosition] = useState([40, 0]);
 
   const {
@@ -60,19 +60,20 @@ function Map() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
         />
-        {cities.map((city) => (
-          <Marker
-            position={[city.position.lat, city.position.lng]}
-            key={city.id}
-          >
-            <Popup>
-              <span>
-                {city.emoji}
-                <span>{city.cityName}</span>
-              </span>
-            </Popup>
-          </Marker>
-        ))}
+        {cities &&
+          cities.map((city) => (
+            <Marker
+              position={[city.position.lat, city.position.lng]}
+              key={city.id}
+            >
+              <Popup>
+                <span>
+                  {city.emoji}
+                  <span>{city.cityName}</span>
+                </span>
+              </Popup>
+            </Marker>
+          ))}
         <ChangeCenter position={mapPosition} />
         <DetectClick />
       </MapContainer>

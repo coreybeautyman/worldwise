@@ -9,7 +9,7 @@ function CountryList() {
 
   if (isLoading) return <Spinner />;
 
-  if (!cities.length)
+  if (!cities || !cities.length)
     return <Message message="Add you're first city by clicking on the map" />;
 
   const countries = cities.reduce((arr, city) => {
