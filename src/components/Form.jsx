@@ -12,7 +12,7 @@ import { useUrlPosition } from '../../hooks/useUrlPosition';
 import Message from './Message';
 import Spinner from './Spinner';
 import DatePicker from 'react-datepicker';
-import { useCities } from '../Contexts/citiesContext';
+import { useCities } from '../Contexts/CitiesContext';
 
 export function convertToEmoji(countryCode) {
   const codePoints = countryCode

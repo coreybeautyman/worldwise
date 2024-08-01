@@ -5,7 +5,7 @@ import CityList from './components/CityList';
 import CountryList from './components/CountryList';
 import City from './components/City';
 import Form from './components/Form';
-import { CitiesProvider } from './Contexts/citiesContext';
+import { CitiesProvider } from './Contexts/CitiesContext';
 import { AuthProvider } from './Contexts/FakeAuthContext';
 import ProtectedRoute from './pages/ProtectedRoute';
 import SpinnerFullPage from './components/SpinnerFullPage';
