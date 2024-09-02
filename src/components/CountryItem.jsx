@@ -1,4 +1,4 @@
-import styles from "./CountryItem.module.css";
+import styles from './CSS/CountryItem.module.css';
 
 function CountryItem({ country }) {
   return (

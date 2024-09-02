@@ -3,7 +3,7 @@ import {
   useEffect,
   useContext,
   useReducer,
-  useCallback
+  useCallback,
 } from 'react';
 
 const CitiesContext = createContext();
@@ -14,7 +14,7 @@ const initialState = {
   cities: [],
   isLoading: false,
   currentCity: {},
-  error: ''
+  error: '',
 };
 
 function reducer(state, action) {
@@ -31,14 +31,14 @@ function reducer(state, action) {
         ...state,
         isLoading: false,
         cities: [...state.cities, action.payload],
-        currentCity: action.payload
+        currentCity: action.payload,
       };
     case 'city/deleted':
       return {
         ...state,
         isLoading: false,
-        cities: state.cities.filter((city) => city.id !== action.payload),
-        currentCity: {}
+        cities: state.cities.filter(city => city.id !== action.payload),
+        currentCity: {},
       };
     case 'rejected':
       return { ...state, isLoading: false, error: action.payload };
@@ -62,7 +62,7 @@ function CitiesProvider({ children }) {
       } catch (error) {
         dispatch({
           type: 'rejected',
-          payload: 'There was an Error loading data!'
+          payload: 'There was an Error loading data!',
         });
       }
     }
@@ -75,7 +75,7 @@ function CitiesProvider({ children }) {
       try {
         dispatch({ type: 'loading' });
         const data = JSON.parse(localStorage.getItem('cities') || []);
-        const city = data.find((city) => city.id === id);
+        const city = data.find(city => city.id === id);
         if (city) {
           dispatch({ type: 'city/loaded', payload: city });
         } else {
@@ -84,7 +84,7 @@ function CitiesProvider({ children }) {
       } catch (error) {
         dispatch({
           type: 'rejected',
-          payload: 'There was an Error loading data!'
+          payload: 'There was an Error loading data!',
         });
       }
     },
@@ -103,7 +103,7 @@ function CitiesProvider({ children }) {
     } catch (error) {
       dispatch({
         type: 'rejected',
-        payload: 'There was an Error creating the city'
+        payload: 'There was an Error creating the city',
       });
     }
   }
@@ -113,17 +113,17 @@ function CitiesProvider({ children }) {
       dispatch({ type: 'loading' });
 
       const data = JSON.parse(localStorage.getItem('cities') || []);
-      const newData = data.filter((city) => city.id !== id);
+      const newData = data.filter(city => city.id !== id);
       localStorage.setItem('cities', JSON.stringify(newData));
 
       dispatch({
         type: 'city/deleted',
-        payload: id
+        payload: id,
       });
     } catch (error) {
       dispatch({
         type: 'rejected',
-        payload: 'there was an error deleting a city'
+        payload: 'there was an error deleting a city',
       });
     }
   }
@@ -137,7 +137,7 @@ function CitiesProvider({ children }) {
         error,
         getCity,
         createCity,
-        deleteCity
+        deleteCity,
       }}
     >
       {children}

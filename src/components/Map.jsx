@@ -1,29 +1,27 @@
 import { useNavigate } from 'react-router-dom';
-import styles from './Map.module.css';
+import styles from './CSS/Map.module.css';
 import {
   MapContainer,
   Marker,
   Popup,
   TileLayer,
   useMap,
-  useMapEvents
+  useMapEvents,
 } from 'react-leaflet';
 import { useEffect, useState } from 'react';
 import { useCities } from '../Contexts/citiesContext';
-// import { map } from 'leaflet';
 import { useGeolocation } from '../../hooks/useGeolocation';
 import Button from './Button';
 import { useUrlPosition } from '../../hooks/useUrlPosition';
 
 function Map() {
   const { cities } = useCities();
-  // const navigate = useNavigate();
   const [mapPosition, setMapPosition] = useState([40, 0]);
 
   const {
     isLoading: isLoadingPosition,
     postition: geoLocationPosition,
-    getPosition
+    getPosition,
   } = useGeolocation();
 
   const [mapLat, mapLng] = useUrlPosition();
@@ -46,7 +44,7 @@ function Map() {
   return (
     <div className={styles.mapContainer}>
       {!geoLocationPosition && (
-        <Button type='position' onClick={getPosition}>
+        <Button type="position" onClick={getPosition}>
           {isLoadingPosition ? 'Loading...' : 'Use your position'}
         </Button>
       )}
@@ -58,10 +56,10 @@ function Map() {
       >
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {cities &&
-          cities.map((city) => (
+          cities.map(city => (
             <Marker
               position={[city.position.lat, city.position.lng]}
               key={city.id}
@@ -90,7 +88,7 @@ function ChangeCenter({ position }) {
 function DetectClick() {
   const navigate = useNavigate();
   useMapEvents({
-    click: (e) => navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`)
+    click: e => navigate(`form?lat=${e.latlng.lat}&lng=${e.latlng.lng}`),
   });
 }
 

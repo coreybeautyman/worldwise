@@ -1,5 +1,5 @@
 import CityItem from './CityItem';
-import styles from './CityList.module.css';
+import styles from './CSS/CityList.module.css';
 import Spinner from './Spinner';
 import Message from './Message';
 import { useCities } from '../Contexts/citiesContext';
@@ -14,7 +14,7 @@ function CityList() {
 
   return (
     <div className={styles.cityList}>
-      {cities.map((city) => (
+      {cities.map(city => (
         <CityItem city={city} key={city.id} />
       ))}
     </div>
